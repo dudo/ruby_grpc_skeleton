@@ -1,0 +1,15 @@
+require:
+  - rubocop-performance
+
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+  - lib/*_pb.rb
+Style/Documentation:
+  Enabled: false
+Style/SymbolProc:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Exclude:
+  - server.rb
+  - lib/**/server.rb

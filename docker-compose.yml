@@ -1,0 +1,48 @@
+version: "3.7"
+# https://docs.docker.com/docker-for-mac/osxfs/
+services:
+  db:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: $PG_USER
+      POSTGRES_PASSWORD: $PG_PASSWORD
+    volumes:
+    - postgres:/var/lib/postgresql/data
+
+  my_service:
+    build: .
+    entrypoint: bundle exec
+    command: server.rb
+    depends_on:
+    - db
+    volumes:
+    - bundle:/usr/local/bundle
+    ports:
+    - 50052:50052
+
+  bundle:
+    build: .
+    entrypoint: bundle
+    command: check
+    volumes:
+    - bundle:/usr/local/bundle
+
+  rspec:
+    build: .
+    entrypoint: bundle exec rspec
+    command: --version
+    depends_on:
+    - db
+    volumes:
+    - bundle:/usr/local/bundle
+
+  protoc:
+    build: .
+    entrypoint: bundle exec grpc_tools_ruby_protoc
+    command: --ruby_out=./lib --grpc_out=./lib ../protos/card_service.proto
+    volumes:
+    - bundle:/usr/local/bundle
+
+volumes:
+  postgres: {}
+  bundle: {}

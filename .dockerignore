@@ -1,0 +1,11 @@
+/log
+/tmp
+.git
+
+# Ignore version control
+.tool-versions
+.ruby-version
+
+# Ignore docker development
+docker-compose.yml
+docker-compose.override.yml
