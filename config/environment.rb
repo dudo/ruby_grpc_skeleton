@@ -3,7 +3,7 @@
 require 'bundler/setup'
 require 'hanami/setup'
 require 'hanami/model'
-require_relative '../lib/card_service'
+require_relative '../lib/my_service'
 
 Hanami.configure do
   model do
@@ -13,9 +13,9 @@ Hanami.configure do
     # Available options:
     #
     #  * SQL adapter
-    #    adapter :sql, 'sqlite://db/card_service_development.sqlite3'
-    #    adapter :sql, 'postgresql://localhost/card_service_development'
-    #    adapter :sql, 'mysql://localhost/card_service_development'
+    #    adapter :sql, 'sqlite://db/my_service_development.sqlite3'
+    #    adapter :sql, 'postgresql://localhost/my_service_development'
+    #    adapter :sql, 'mysql://localhost/my_service_development'
     #
     adapter :sql, ENV.fetch('DATABASE_URL')
 

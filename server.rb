@@ -29,19 +29,15 @@ Bundler.require(:default)
 require_relative 'lib/my_service/server'
 
 module RubyLogger
+  LOGGER = Logger.new($stderr, level: Logger::WARN)
   def logger
     Logger.new('/proc/1/fd/1')
   end
 end
 
-# GRPC is the general RPC module
 module GRPC
-  # Inject the noop #logger if no module-level logger method has been injected.
   extend RubyLogger
 end
-
-$stdout.reopen("/dev/null", "w")
-$stderr.reopen("/dev/null", "w")
 
 class Server
   HOST = '0.0.0.0'.freeze

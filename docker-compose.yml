@@ -39,7 +39,7 @@ services:
   protoc:
     build: .
     entrypoint: bundle exec grpc_tools_ruby_protoc
-    command: --ruby_out=./lib --grpc_out=./lib ../protos/card_service.proto
+    command: --ruby_out=./lib --grpc_out=./lib ../protos/my_service.proto
     volumes:
     - bundle:/usr/local/bundle
 
