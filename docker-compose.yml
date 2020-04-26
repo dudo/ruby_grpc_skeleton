@@ -11,8 +11,7 @@ services:
 
   my_service:
     build: .
-    entrypoint: bundle exec
-    command: server.rb
+    entrypoint: bundle exec server.rb
     depends_on:
     - db
     volumes:
