@@ -57,7 +57,9 @@ class Server
       @server.handle(MyService::Server)
       @server.run_till_terminated_or_interrupted([1, 'int', 'SIGQUIT'])
 
-      Logger.new('/proc/1/fd/1').info "gRPC server started on #{address}, ready to accept connections"
+      Logger
+        .new('/proc/1/fd/1')
+        .info "gRPC server started on #{address}, ready to accept connections"
     end
 
     def address

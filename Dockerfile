@@ -20,7 +20,7 @@ ENV GEM_HOME /usr/local/bundle
 ADD Gemfile* ./
 RUN gem update --system
 RUN gem install bundler
-RUN bundle install -j4 --retry 3
+RUN bundle install --jobs 4 --retry 3
 
 ADD . ./
 

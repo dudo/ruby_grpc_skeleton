@@ -5,6 +5,8 @@ AllCops:
   TargetRubyVersion: 2.6
   Exclude:
   - lib/*_pb.rb
+  - db/**/*
+
 Style/Documentation:
   Enabled: false
 Style/SymbolProc:
@@ -13,3 +15,7 @@ Style/FrozenStringLiteralComment:
   Exclude:
   - server.rb
   - lib/**/server.rb
+
+Layout/LineLength:
+  Max: 80
+  IgnoredPatterns: ['\A\s*#']
