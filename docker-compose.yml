@@ -38,9 +38,10 @@ services:
   protoc:
     build: .
     entrypoint: bundle exec grpc_tools_ruby_protoc
-    command: --ruby_out=./lib --grpc_out=./lib ../protos/my_service.proto
+    command: -I ../protos --ruby_out=./lib --grpc_out=./lib ../protos/my_service.proto
     volumes:
     - bundle:/usr/local/bundle
+    - ../protos:/usr/src/protos
 
 volumes:
   postgres: {}

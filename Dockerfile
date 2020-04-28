@@ -25,5 +25,4 @@ RUN bundle install -j4 --retry 3
 ADD . ./
 
 EXPOSE 50052
-ENTRYPOINT ["bundle", "exec"]
-CMD ["server.rb"]
+ENTRYPOINT ["bundle", "exec", "server.rb"]
