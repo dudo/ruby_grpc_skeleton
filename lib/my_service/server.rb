@@ -1,5 +1,4 @@
-require_relative '../my_service_pb'
-require_relative '../my_service_services_pb'
+require 'byebug'
 
 module MyService
   class Server < MyService::Service

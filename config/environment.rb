@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'rubygems'
 require 'bundler/setup'
 require 'hanami/setup'
 require 'hanami/model'
@@ -26,7 +27,7 @@ Hanami.configure do
     schema     'db/schema.sql'
   end
 
-  logger Logger.new('/proc/1/fd/1')
+  logger GRPC.logger
 
   environment :development do
     # See: https://guides.hanamirb.org/projects/logging
