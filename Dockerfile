@@ -1,4 +1,4 @@
-FROM ruby:2.6-slim
+FROM ruby:2.7
 
 LABEL maintainer="Your Name <you@name.io>"
 
@@ -20,6 +20,8 @@ ENV GEM_HOME /usr/local/bundle
 ADD Gemfile* ./
 RUN gem update --system
 RUN gem install bundler
+RUN bundle lock --add-platform ruby
+RUN bundle config force_ruby_platform true
 RUN bundle install --jobs 4 --retry 3
 
 ADD . ./
