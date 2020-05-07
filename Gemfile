@@ -11,10 +11,6 @@ gem 'pg', '~> 1.0'
 
 gem 'rake'
 
-group :plugins do
-  gem 'hanami-annotate'
-end
-
 group :test, :development do
   gem 'byebug'
   gem 'dotenv', '~> 2.4'
