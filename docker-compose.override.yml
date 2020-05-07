@@ -1,0 +1,30 @@
+version: "3.7"
+# https://docs.docker.com/docker-for-mac/osxfs/
+# `docker-compose up` automatically reads the override file and applies it.
+services:
+  db:
+    env_file: .env # Be aware that this prevents any ARG or ENV settings from Dockerfile to be loaded
+
+  my_service:
+    env_file: .env
+    volumes:
+    - .:/usr/src/app:delegated
+    stdin_open: true
+    tty: true
+
+  bundle:
+    env_file: .env
+    volumes:
+    - .:/usr/src/app:delegated
+
+  rspec:
+    env_file: .env
+    volumes:
+    - .:/usr/src/app:delegated
+    stdin_open: true
+    tty: true
+
+  protoc:
+    env_file: .env
+    volumes:
+    - .:/usr/src/app:delegated

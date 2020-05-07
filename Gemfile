@@ -3,8 +3,12 @@
 source 'https://rubygems.org'
 
 gem 'grpc'
+
+gem 'bigdecimal', '~> 1.4' # temporary fix until https://github.com/hanami/model/issues/570 is live
 gem 'hanami-model', '~> 1.3'
+
 gem 'pg', '~> 1.0'
+
 gem 'rake'
 
 group :plugins do

@@ -40,6 +40,5 @@ coverage
 .ruby-version
 
 # Ignore overrides
-docker-compose.override.yml
 .env.local
 .env.*.local
