@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :grpc do
   desc 'Call the gRPC server for testing'
   task fetch_something: :environment do

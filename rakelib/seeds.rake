@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :seed do
   desc 'Create a room for testing'
   task things: :environment do
