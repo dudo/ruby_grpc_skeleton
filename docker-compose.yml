@@ -10,6 +10,7 @@ services:
     - postgres:/var/lib/postgresql/data
 
   my_service:
+    container_name: my-service
     build: .
     entrypoint: bundle exec server.rb
     depends_on:
