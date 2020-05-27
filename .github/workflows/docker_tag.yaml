@@ -1,14 +1,10 @@
-# https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
-# https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables#default-environment-variables
-# https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions
-
 on:
-  pull_request:
-    types: [labeled]
-name: Docker
+  push:
+    tags:
+    - v*
+name: Docker Tag
 jobs:
   docker:
-    if: github.event.label.name == 'image'
     name: Build and push Docker Image
     runs-on: ubuntu-latest
     steps:
@@ -20,4 +16,3 @@ jobs:
         registry: docker.pkg.github.com
         repository: cardbinder/my_service/my_service
         tag_with_ref: true
-        tag_with_sha: true
