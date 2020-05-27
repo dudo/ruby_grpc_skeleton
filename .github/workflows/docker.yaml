@@ -1,26 +1,23 @@
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions
 # https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables#default-environment-variables
+# https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions
 
 on:
   pull_request:
     types: [labeled]
 name: Docker
-env:
-  TARGET_IMAGE: docker.pkg.github.com/$GITHUB_REPOSITORY/${GITHUB_REPOSITORY##*/}:${GITHUB_SHA::7}
 jobs:
   docker:
     if: github.event.label.name == 'image'
     name: Build and push Docker Image
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Registry
-      uses: azure/docker-login@v1
+    - uses: actions/checkout@v2 # https://github.com/actions/checkout
+    - uses: docker/build-push-action@v1 # https://github.com/marketplace/actions/build-and-push-docker-images
       with:
-        login-server: docker.pkg.github.com
         username: $GITHUB_ACTOR
         password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build
-      run: docker build -t $TARGET_IMAGE .
-    - name: Push
-      run: docker push $TARGET_IMAGE
+        registry: docker.pkg.github.com
+        repository: cardbinder/my_service/my_service
+        tag_with_ref: true
+        tag_with_sha: true
