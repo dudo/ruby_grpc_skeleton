@@ -6,6 +6,8 @@ $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 # require_relative './my_service/entities/foo'
 # require_relative './my_service/repositories/foo_repository'
 
+require_relative './my_service/version'
+
 require_relative './my_service_services_pb'
 
 require_relative './my_service/server'
