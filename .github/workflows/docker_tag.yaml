@@ -14,5 +14,5 @@ jobs:
         username: $GITHUB_ACTOR
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
-        repository: cardbinder/my_service/my_service
+        repository: cardbinder/api_gateway/api_gateway
         tag_with_ref: true

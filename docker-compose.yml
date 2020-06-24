@@ -1,50 +1,45 @@
 version: "3.7"
 # https://docs.docker.com/docker-for-mac/osxfs/
 services:
-  db:
-    image: postgres:11
-    environment:
-      POSTGRES_USER: $PGUSER
-      POSTGRES_PASSWORD: $PGPASSWORD
-      POSTGRES_DB: $PGDATABASE
-    volumes:
-    - postgres:/var/lib/postgresql/data
-
   my_service:
     container_name: my-service
     build: .
-    entrypoint: bundle exec server.rb
-    depends_on:
-    - db
+    entrypoint: bundle
+    command: exec server.rb
     volumes:
-    - bundle:/usr/local/bundle
+      - cardbinder_bundle:/usr/local/bundle:cached
     ports:
-    - 50052:50052
+      - 50052:50052
 
   bundle:
     build: .
     entrypoint: bundle
     command: check
     volumes:
-    - bundle:/usr/local/bundle
+      - cardbinder_bundle:/usr/local/bundle:cached
 
   rspec:
     build: .
-    entrypoint: bundle exec rspec
-    command: --version
-    depends_on:
-    - db
+    entrypoint: bundle
+    command: exec rspec --version
     volumes:
-    - bundle:/usr/local/bundle
+      - cardbinder_bundle:/usr/local/bundle:cached
 
   protoc:
     build: .
-    entrypoint: bundle exec grpc_tools_ruby_protoc
-    command: -I ../protos --ruby_out=./lib --grpc_out=./lib ../protos/my_service.proto
+    entrypoint: bundle
+    command: |
+      exec grpc_tools_ruby_protoc
+      -I ../protos --ruby_out=./lib --grpc_out=./lib ../protos/my_service.proto
     volumes:
-    - bundle:/usr/local/bundle
-    - ../protos:/usr/src/protos
+      - cardbinder_bundle:/usr/local/bundle:cached
+      - ../protos:/usr/src/protos
 
 volumes:
-  postgres: {}
-  bundle: {}
+  cardbinder_bundle:
+    external: true
+
+networks:
+  default:
+    external:
+      name: cardbinder_default
