@@ -17,7 +17,8 @@ cd ~/projects/my_project/
 git clone git@github.com:my_project/my_service.git
 git clone git@github.com:my_project/protos.git
 
-cd my_service
+cd ~/projects/my_project/my_service
+docker-compose run --rm bundle install --with development test
 docker-compose up -d # you might have to kick this a few times...
 docker-compose run --rm bundle exec hanami db prepare
 docker-compose run --rm bundle exec rake seed:things

@@ -4,11 +4,11 @@ source 'https://rubygems.org'
 
 gem 'grpc'
 
-gem 'bigdecimal', '~> 1.4' # temporary fix until https://github.com/hanami/model/issues/570 is live
+gem 'bigdecimal', '~> 1.4' # temporary fix until https://github.com/hanami/model/issues/570 is fixed
 gem 'hanami-model'
 
+gem 'hanami'
 gem 'pg'
-
 gem 'rake'
 
 group :test, :development do
@@ -16,7 +16,6 @@ group :test, :development do
   gem 'dotenv'
   gem 'faker'
   gem 'grpc-tools'
-  gem 'hanami'
 end
 
 group :development do
