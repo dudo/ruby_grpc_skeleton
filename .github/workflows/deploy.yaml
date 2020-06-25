@@ -18,6 +18,6 @@ jobs:
       - name: Kustomized Namespace - Create Overlay
         env:
           TOKEN: ${{ secrets.TOKEN }}
-        uses: zyngl/create_kustomized_namespace@v1
+        uses: zyngl/create_kustomized_namespace@v1.3.0
         with:
           args: --flux
