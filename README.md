@@ -25,24 +25,25 @@ docker-compose run --rm bundle exec rake seed:things
 docker-compose run --rm bundle exec rake grpc:fetch_thing
 ```
 
-How to build gRPC files (when you change applicable `.proto` files):
+How to build gRPC files when you change applicable `.proto` files:
 
 ```shell
-% docker-compose run --rm protoc
+# This expects your proto files to be in the same directory as your app
+docker-compose run --rm protoc
 ```
 
 How to run various Hanami commands:
 
 ```shell
-% docker-compose run --rm bundle exec hanami console
-% docker-compose run --rm bundle exec hanami g model NewModel
+docker-compose run --rm bundle exec hanami console
+docker-compose run --rm bundle exec hanami g model NewModel
 ```
 
 How to prepare (create and migrate) DB for `development` and `test` environments:
 
 ```shell
-% docker-compose run -e HANAMI_ENV=test --rm bundle exec hanami db prepare
-% docker-compose run --rm rpsec
+docker-compose run -e HANAMI_ENV=test --rm bundle exec hanami db prepare
+docker-compose run --rm rpsec
 ```
 
 ## Deployment
