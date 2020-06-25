@@ -4,18 +4,18 @@ Hanami / gRPC fusion. This service does... what?
 
 ## System Architecture
 
-- [30k ft view](https://drive.google.com/file/d/1cRxMR6YJ01uNnrpi4M1xT93CrC8Mn6dO/view)
-- [Data model](https://dbdiagram.io/d/5d68c207ced98361d6de0cd6)
+- [30k ft view](https://draw.io/)
+- [Data model](https://dbdiagram.io/)
 
 ## Setup
 
 This service makes heavy use of docker and docker compose. Setting up docker is beyond the scope of this readme.
 
 ```shell
-mkdir ~/projects/cardbinder/
-cd ~/projects/cardbinder/
-git clone git@github.com:cardbinder/my_service.git
-git clone git@github.com:cardbinder/protos.git
+mkdir ~/projects/my_project/
+cd ~/projects/my_project/
+git clone git@github.com:my_project/my_service.git
+git clone git@github.com:my_project/protos.git
 
 cd my_service
 docker-compose up -d # you might have to kick this a few times...
@@ -46,11 +46,12 @@ How to prepare (create and migrate) DB for `development` and `test` environments
 
 ## Deployment
 
-This should be done for you via CI/CD, but in case you need to manually push an image
+This should be done for you via CI/CD, but in case you need to manually push an image:
 
 ```shell
-docker build -t docker.pkg.github.com/cardbinder/my_service/my_service:0.1.0 .
-docker push docker.pkg.github.com/cardbinder/my_service/my_service:0.1.0
+docker login https://docker.pkg.github.com
+docker build -t docker.pkg.github.com/my_project/my_service/my_service:0.1.0 .
+docker push docker.pkg.github.com/my_project/my_service/my_service:0.1.0
 ```
 
 ## Reading

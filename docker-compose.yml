@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 # https://docs.docker.com/docker-for-mac/osxfs/
 services:
   my_service:
@@ -7,7 +7,7 @@ services:
     entrypoint: bundle
     command: exec server.rb
     volumes:
-      - cardbinder_bundle:/usr/local/bundle:cached
+      - bundle:/usr/local/bundle:cached
     ports:
       - 50052:50052
 
@@ -16,14 +16,14 @@ services:
     entrypoint: bundle
     command: check
     volumes:
-      - cardbinder_bundle:/usr/local/bundle:cached
+      - bundle:/usr/local/bundle:cached
 
   rspec:
     build: .
     entrypoint: bundle
     command: exec rspec --version
     volumes:
-      - cardbinder_bundle:/usr/local/bundle:cached
+      - bundle:/usr/local/bundle:cached
 
   protoc:
     build: .
@@ -32,14 +32,8 @@ services:
       exec grpc_tools_ruby_protoc
       -I ../protos --ruby_out=./lib --grpc_out=./lib ../protos/my_service.proto
     volumes:
-      - cardbinder_bundle:/usr/local/bundle:cached
+      - bundle:/usr/local/bundle:cached
       - ../protos:/usr/src/protos
 
 volumes:
-  cardbinder_bundle:
-    external: true
-
-networks:
-  default:
-    external:
-      name: cardbinder_default
+  bundle: {}

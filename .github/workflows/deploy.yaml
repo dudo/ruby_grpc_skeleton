@@ -13,11 +13,11 @@ jobs:
     name: Push to Cluster
     runs-on: ubuntu-latest
     env:
-      CLUSTER_REPO: cardbinder/k8s_dev
+      CLUSTER_REPO: my_project/k8s_dev
     steps:
-    - name: Kustomized Namespace - Create Overlay
-      env:
-        TOKEN: ${{ secrets.TOKEN }}
-      uses: zyngl/create_kustomized_namespace@v1
-      with:
-        args: --flux
+      - name: Kustomized Namespace - Create Overlay
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        uses: zyngl/create_kustomized_namespace@v1
+        with:
+          args: --flux

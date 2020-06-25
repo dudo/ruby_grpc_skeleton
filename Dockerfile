@@ -1,6 +1,6 @@
 FROM ruby:2.7
 
-LABEL maintainer="Your Name <you@name.io>"
+LABEL maintainer="Brett Dudo <brett@dudo.io>"
 
 # Install dependencies
 # - build-essential: To ensure certain gems can be compiled
@@ -10,21 +10,23 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev postgresq
 WORKDIR /usr/src/app
 
 # Cleanup
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Configure bundler
 ENV LANG C.UTF-8
 ENV GEM_HOME /usr/local/bundle
 
 ADD Gemfile* ./
-RUN gem update --system
-RUN gem install bundler
-RUN bundle lock --add-platform ruby
-RUN bundle config force_ruby_platform true
-RUN bundle install --jobs 4 --retry 3
+RUN gem update --system && \
+    gem install bundler
+RUN bundle config set without 'test development' && \
+    bundle install --jobs 4 --retry 3
 
 ADD . ./
 
 EXPOSE 50052
-ENTRYPOINT ["bundle", "exec", "server.rb"]
+
+# Start app
+ENTRYPOINT  [ "bundle" ]
+CMD [ "exec", "server.rb" ]

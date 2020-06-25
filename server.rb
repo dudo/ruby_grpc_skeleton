@@ -19,7 +19,7 @@ class Server
 
     def start_grpc_server
       # https://www.rubydoc.info/github/grpc/grpc/7131c62/GRPC/RpcServer
-      @server = GRPC::RpcServer.new(pool_size: 2)
+      @server = GRPC::RpcServer.new
       @server.add_http2_port(address, :this_port_is_insecure)
       GRPC.logger.info("gRPC server started on #{address}...")
       @server.handle(MyService::Server)

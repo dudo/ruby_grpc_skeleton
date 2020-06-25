@@ -1,18 +1,20 @@
 on:
   push:
     tags:
-    - v*
+      - v*
 name: Docker Tag
+env:
+  SERVICE: ${GITHUB_REPOSITORY##*/}
 jobs:
   docker:
     name: Build and push Docker Image
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2 # https://github.com/actions/checkout
-    - uses: docker/build-push-action@v1 # https://github.com/marketplace/actions/build-and-push-docker-images
-      with:
-        username: $GITHUB_ACTOR
-        password: ${{ secrets.GITHUB_TOKEN }}
-        registry: docker.pkg.github.com
-        repository: cardbinder/api_gateway/api_gateway
-        tag_with_ref: true
+      - uses: actions/checkout@v2 # https://github.com/actions/checkout
+      - uses: docker/build-push-action@v1 # https://github.com/marketplace/actions/build-and-push-docker-images
+        with:
+          username: $GITHUB_ACTOR
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: "${GITHUB_REPOSITORY}/${SERVICE}"
+          tag_with_ref: true
