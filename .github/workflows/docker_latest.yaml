@@ -16,5 +16,5 @@ jobs:
           username: $GITHUB_ACTOR
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: "${GITHUB_REPOSITORY}/${SERVICE}"
+          repository: ${GITHUB_REPOSITORY}/${SERVICE}
           tags: latest

@@ -20,6 +20,6 @@ jobs:
           username: $GITHUB_ACTOR
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: "${GITHUB_REPOSITORY}/${SERVICE}"
+          repository: ${GITHUB_REPOSITORY}/${SERVICE}
           tag_with_ref: true
           tag_with_sha: true
