@@ -6,8 +6,6 @@ on:
   pull_request:
     types: [labeled]
 name: Docker Feature
-env:
-  SERVICE: ${GITHUB_REPOSITORY##*/}
 jobs:
   docker:
     if: github.event.label.name == 'image'
@@ -15,11 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2 # https://github.com/actions/checkout
+      - name: Set ENV
+        run: echo ::set-env name=INPUT_REPOSITORY::$GITHUB_REPOSITORY/${GITHUB_REPOSITORY##*/}
       - uses: docker/build-push-action@v1 # https://github.com/marketplace/actions/build-and-push-docker-images
         with:
           username: $GITHUB_ACTOR
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: ${GITHUB_REPOSITORY}/${SERVICE}
+          repository: ${{ env.INPUT_REPOSITORY }}
           tag_with_ref: true
           tag_with_sha: true
