@@ -17,13 +17,24 @@ jobs:
         id: tag_check
         with:
           git_tag_prefix: v
-  push_tag:
-    name: Push Tag
+  push:
+    name: Push Tag & Image
     needs: check_version
     runs-on: ubuntu-latest
     steps:
-      - name: Push Tag to GitHub
-        run: |
-          curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
-          -d "{\"ref\": \"refs/tags/${{needs.check_version.outputs.git_tag_name}}\", \"sha\": \"${GITHUB_SHA}\"}" \
-          "https://api.github.com/repos/${GITHUB_REPOSITORY}/git/refs"
+    - name: Push Tag to GitHub
+      run: |
+        curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
+        -d "{\"ref\": \"refs/tags/${{needs.check_version.outputs.git_tag_name}}\", \"sha\": \"${GITHUB_SHA}\"}" \
+        "https://api.github.com/repos/${GITHUB_REPOSITORY}/git/refs"
+    - name: Set ENV
+      run: echo ::set-env name=INPUT_REPOSITORY::$GITHUB_REPOSITORY/${GITHUB_REPOSITORY##*/}
+    - uses: actions/checkout@v2 # https://github.com/actions/checkout
+    - name: Push Image to GitHub
+      uses: docker/build-push-action@v1 # https://github.com/marketplace/actions/build-and-push-docker-images
+      with:
+        username: $GITHUB_ACTOR
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: ${{ env.INPUT_REPOSITORY }}
+        tags: ${{ needs.check_version.outputs.git_tag_name }}
