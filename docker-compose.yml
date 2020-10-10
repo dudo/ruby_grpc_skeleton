@@ -18,7 +18,7 @@ services:
     depends_on:
       - db
     volumes:
-      - bundle:/usr/local/bundle:cached
+      - bundle:/usr/local/bundle:delegated
     ports:
       - 50052:50052
 
@@ -27,14 +27,14 @@ services:
     entrypoint: bundle
     command: check
     volumes:
-      - bundle:/usr/local/bundle:cached
+      - bundle:/usr/local/bundle:delegated
 
   rspec:
     build: .
     entrypoint: bundle
     command: exec rspec --version
     volumes:
-      - bundle:/usr/local/bundle:cached
+      - bundle:/usr/local/bundle:delegated
 
   protoc:
     build: .
@@ -43,7 +43,7 @@ services:
       exec grpc_tools_ruby_protoc
       -I ../protos --ruby_out=./lib --grpc_out=./lib ../protos/my_service.proto
     volumes:
-      - bundle:/usr/local/bundle:cached
+      - bundle:/usr/local/bundle:delegated
       - ../protos:/usr/src/protos
 
 volumes:
