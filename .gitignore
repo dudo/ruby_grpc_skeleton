@@ -37,7 +37,7 @@ coverage
 
 # Ignore version control
 .tool-versions
-.ruby-version
+.*-version
 
 # Ignore overrides
 .env.local

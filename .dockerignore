@@ -4,7 +4,7 @@
 
 # Ignore version control
 .tool-versions
-.ruby-version
+.*-version
 
 # Ignore docker development
 docker-compose.yml
