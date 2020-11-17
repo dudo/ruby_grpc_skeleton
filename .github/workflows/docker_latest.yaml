@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2 # https://github.com/actions/checkout
       - name: Set ENV
-        run: echo ::set-env name=INPUT_REPOSITORY::$GITHUB_REPOSITORY/${GITHUB_REPOSITORY##*/}
+        run: echo INPUT_REPOSITORY=$GITHUB_REPOSITORY/${GITHUB_REPOSITORY##*/} >> $GITHUB_ENV
       - uses: docker/build-push-action@v1 # https://github.com/marketplace/actions/build-and-push-docker-images
         with:
           username: $GITHUB_ACTOR

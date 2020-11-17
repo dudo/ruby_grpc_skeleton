@@ -28,7 +28,7 @@ jobs:
         -d "{\"ref\": \"refs/tags/${{needs.check_version.outputs.git_tag_name}}\", \"sha\": \"${GITHUB_SHA}\"}" \
         "https://api.github.com/repos/${GITHUB_REPOSITORY}/git/refs"
     - name: Set ENV
-      run: echo ::set-env name=INPUT_REPOSITORY::$GITHUB_REPOSITORY/${GITHUB_REPOSITORY##*/}
+      run: echo INPUT_REPOSITORY=$GITHUB_REPOSITORY/${GITHUB_REPOSITORY##*/} >> $GITHUB_ENV
     - uses: actions/checkout@v2 # https://github.com/actions/checkout
     - name: Push Image to GitHub
       uses: docker/build-push-action@v1 # https://github.com/marketplace/actions/build-and-push-docker-images
