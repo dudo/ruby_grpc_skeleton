@@ -25,7 +25,7 @@ docker-compose run --rm bundle exec rake seed:things
 docker-compose run --rm bundle exec rake grpc:fetch_thing
 ```
 
-How to build gRPC files when you change applicable `.proto` files:
+Generate code when you change applicable `.proto` files:
 
 ```shell
 # This expects your proto files to be in the same directory as your app
