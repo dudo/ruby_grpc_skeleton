@@ -11,6 +11,6 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2 # https://github.com/actions/checkout
-      - uses: dudo/tag_check@v1.0.1
+      - uses: dudo/tag_check@v1.0.2
         with:
           git_tag_prefix: v
