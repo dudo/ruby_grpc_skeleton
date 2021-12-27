@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'grpc'
 
-gem 'bigdecimal', '~> 1.4' # temporary fix until https://github.com/hanami/model/issues/570 is fixed
+gem 'bigdecimal', '~> 3.1' # temporary fix until https://github.com/hanami/model/issues/570 is fixed
 gem 'hanami-model'
 
 gem 'hanami'
