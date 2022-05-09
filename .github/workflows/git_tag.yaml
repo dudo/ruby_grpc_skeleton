@@ -31,7 +31,7 @@ jobs:
       run: echo INPUT_REPOSITORY=$GITHUB_REPOSITORY/${GITHUB_REPOSITORY##*/} >> $GITHUB_ENV
     - uses: actions/checkout@v2 # https://github.com/actions/checkout
     - name: Push Image to GitHub
-      uses: docker/build-push-action@v1 # https://github.com/marketplace/actions/build-and-push-docker-images
+      uses: docker/build-push-action@v3 # https://github.com/marketplace/actions/build-and-push-docker-images
       with:
         username: $GITHUB_ACTOR
         password: ${{ secrets.GITHUB_TOKEN }}
