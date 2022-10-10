@@ -8,7 +8,7 @@ jobs:
     name: Build and push Docker Image
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2 # https://github.com/actions/checkout
+      - uses: actions/checkout@v3.1.0 # https://github.com/actions/checkout
       - name: Set ENV
         run: echo INPUT_REPOSITORY=$GITHUB_REPOSITORY/${GITHUB_REPOSITORY##*/} >> $GITHUB_ENV
       - uses: docker/build-push-action@v1 # https://github.com/marketplace/actions/build-and-push-docker-images

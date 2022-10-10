@@ -12,7 +12,7 @@ jobs:
     outputs:
       git_tag_name: ${{ steps.tag_check.outputs.git_tag_name }}
     steps:
-      - uses: actions/checkout@v2 # https://github.com/actions/checkout
+      - uses: actions/checkout@v3.1.0 # https://github.com/actions/checkout
       - uses: dudo/tag_check@v1.0.1
         id: tag_check
         with:
@@ -29,7 +29,7 @@ jobs:
         "https://api.github.com/repos/${GITHUB_REPOSITORY}/git/refs"
     - name: Set ENV
       run: echo INPUT_REPOSITORY=$GITHUB_REPOSITORY/${GITHUB_REPOSITORY##*/} >> $GITHUB_ENV
-    - uses: actions/checkout@v2 # https://github.com/actions/checkout
+    - uses: actions/checkout@v3.1.0 # https://github.com/actions/checkout
     - name: Push Image to GitHub
       uses: docker/build-push-action@v1 # https://github.com/marketplace/actions/build-and-push-docker-images
       with:
